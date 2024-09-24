@@ -18,8 +18,8 @@ class LoginController extends Controller
     if (!Auth::attempt($request->only('email', 'password'))) {
         return $this->error('', 'Credentials do not match', 401);
     }
-    $user = User::where('email', $request->email)->first();
-    $user->notify(new LoginNotification());
+    $user = User::where('email', operator: $request->email)->first();
+    $user->notify(instance: new LoginNotification());
     return $this->success([
         'user' => $user,
         'token' => $user->createToken('API Token of ' . $user->first_name)->plainTextToken,

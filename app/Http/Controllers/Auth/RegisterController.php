@@ -7,6 +7,7 @@ use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\RegistrationRequest;
+use App\Notifications\EmailVerificationNotification;
 
 class RegisterController extends Controller
 {
@@ -23,7 +24,7 @@ class RegisterController extends Controller
 
         $user = User::create($newUser);
 
-
+        $user->notify(new EmailVerificationNotification());
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('API Token of ' . $user->first_name)->plainTextToken,

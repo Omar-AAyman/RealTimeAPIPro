@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\EmailVerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -28,7 +29,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
 
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
-//     Route::resource('/tasks', TasksController::class);
-//     Route::post('/logout', [LogoutController::class, 'logout']);
-// });
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/email-verification', [EmailVerificationController::class, 'emailVerification']);
+    Route::get('/resend-email-verification', [EmailVerificationController::class, 'resendEmailVerification']);
+    //     Route::post('/logout', [LogoutController::class, 'logout']);
+});
