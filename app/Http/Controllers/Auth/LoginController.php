@@ -11,18 +11,20 @@ use App\Notifications\LoginNotification;
 
 class LoginController extends Controller
 {
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
 
-    $request->validated($request->all());
+        $request->validated($request->all());
 
-    if (!Auth::attempt($request->only('email', 'password'))) {
-        return $this->error('', 'Credentials do not match', 401);
-    }
-    $user = User::where('email', operator: $request->email)->first();
-    $user->notify(instance: new LoginNotification());
-    return $this->success([
-        'user' => $user,
-        'token' => $user->createToken('API Token of ' . $user->first_name)->plainTextToken,
-    ]);
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return $this->error('', 'Credentials do not match', 401);
+        }
+        $user = User::where(column: 'email', operator: $request->email)->first();
+        $user->notify(instance: new LoginNotification());
+        
+        return $this->success([
+            'user' => $user,
+            'token' => $user->createToken('API Token of ' . $user->first_name)->plainTextToken,
+        ]);
     }
 }
