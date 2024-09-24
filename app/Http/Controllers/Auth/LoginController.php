@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Notifications\LoginNotification;
 
 class LoginController extends Controller
 {
@@ -18,6 +19,7 @@ class LoginController extends Controller
         return $this->error('', 'Credentials do not match', 401);
     }
     $user = User::where('email', $request->email)->first();
+    $user->notify(new LoginNotification());
     return $this->success([
         'user' => $user,
         'token' => $user->createToken('API Token of ' . $user->first_name)->plainTextToken,
