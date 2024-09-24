@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
@@ -34,6 +35,11 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::put('/profile', [ProfileController::class, 'update']);
     Route::post('/email-verification', [EmailVerificationController::class, 'emailVerification']);
     Route::get('/resend-email-verification', [EmailVerificationController::class, 'resendEmailVerification']);
     //     Route::post('/logout', [LogoutController::class, 'logout']);
