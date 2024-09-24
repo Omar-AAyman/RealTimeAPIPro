@@ -20,21 +20,18 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('setapplang')->prefix('{locale}')->group(function () {
+    Route::post('/register', [RegisterController::class, 'register']);
+    Route::post('/login', [LoginController::class, 'login']);
+
+
+    Route::post('/forget-password', [ForgetPasswordController::class, 'forgetPassword']);
+    Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']);
 });
 
 
 
-Route::post('/register', [RegisterController::class, 'register']);
-Route::post('/login', [LoginController::class, 'login']);
-
-
-Route::post('/forget-password', [ForgetPasswordController::class, 'forgetPassword']);
-Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']);
-
-
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::middleware(['auth:sanctum', 'setapplang'])->prefix('{locale}')->group(function () {
     Route::get('/profile', function (Request $request) {
         return $request->user();
     });

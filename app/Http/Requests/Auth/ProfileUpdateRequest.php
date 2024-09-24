@@ -25,7 +25,7 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
             'gender' => ['sometimes', 'max:20'],
-            'phone'    => ['sometimes', 'string', 'unique:users,phone', 'digits_between:10,20'],
+            'phone'    => ['sometimes', 'string', 'unique:users,phone,' . $this->user()->id, 'digits_between:10,20'],
             'email'    => ['required', 'string', 'email', 'unique:users,email,' . $this->user()->id],
             'birth_date' => ['required', 'date', 'date_format:Y-m-d'],
             'image' => ['image', 'mimes:jpg,png,jpeg,webp', 'max:2048'],
