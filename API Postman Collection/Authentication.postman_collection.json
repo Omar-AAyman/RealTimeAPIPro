@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "18ca2c69-b738-4e69-96e4-11569cf6cf39",
+		"name": "Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21260297"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "43494955@oG",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/login",
+				"description": "### Login API\n\nThis API endpoint is used to authenticate and login a user.\n\n#### Request Body\n\n- email (text)\n    \n    - Description:\n        \n- password (text)\n    \n    - Description:\n        \n\n#### Response\n\nThe response is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"string\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"user\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"id\": {\n              \"type\": \"integer\"\n            },\n            \"first_name\": {\n              \"type\": \"string\"\n            },\n            \"last_name\": {\n              \"type\": \"string\"\n            },\n            \"email\": {\n              \"type\": \"string\"\n            },\n            \"phone\": {\n              \"type\": \"string\"\n            },\n            \"gender\": {\n              \"type\": \"string\"\n            },\n            \"image\": {\n              \"type\": \"string\"\n            },\n            \"birth_date\": {\n              \"type\": \"string\"\n            },\n            \"role\": {\n              \"type\": \"string\"\n            },\n            \"status\": {\n              \"type\": \"string\"\n            },\n            \"email_verified_at\": {\n              \"type\": \"string\"\n            },\n            \"phone_verified_at\": {\n              \"type\": \"string\"\n            },\n            \"created_at\": {\n              \"type\": \"string\"\n            },\n            \"updated_at\": {\n              \"type\": \"string\"\n            }\n          }\n        },\n        \"token\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "1|fOtWiv5c9hE4bAZnR7YWOkR2JvrMKdCOhrhVJzbf3814a0b7"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "https:://127.0.0.1:8000/api/en/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-MD5",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Omar",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Ayman",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "43494955_oG",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "43494955_oG",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Email Verification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "11|JOGjsAUdZS6ASjkuUZyhHJIWnO65k7rDkwZbiygi74c62f18"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "otp",
+							"value": "099391",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/email-verification"
+			},
+			"response": []
+		},
+		{
+			"name": "Resend Email Verification",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "11|JOGjsAUdZS6ASjkuUZyhHJIWnO65k7rDkwZbiygi74c62f18"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/resend-email-verification"
+			},
+			"response": []
+		},
+		{
+			"name": "Forget Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/forget-password"
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "otp",
+							"value": "145320",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "43494955@oG",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "43494955@oG",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/reset-password"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "13|Gbus6gBWRVQvwD5LpWVUghLTpL0KrE3pvmbdtGYqe07908b7"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"url": "http://127.0.0.1:8000/api/en/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "13|Gbus6gBWRVQvwD5LpWVUghLTpL0KrE3pvmbdtGYqe07908b7"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "Omar Ayman",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Mohamed Elsabbahi",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "01149685494",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "omaraymn411@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "1999-07-19",
+							"type": "text"
+						},
+						{
+							"key": "_method",
+							"value": "put",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/en/profile"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "SUPER_ADMIN",
+			"value": "16|LoVXcP38dTNk1mhm7wXSw1LpjFOkPRCrEueu4TGcec73c2a7"
+		},
+		{
+			"key": "NORMAL_USER",
+			"value": "17|gW8Xubkl0f1OmXxsN699IKGp9JaJC9zMvmEPbD3pc122e906"
+		}
+	]
+}
