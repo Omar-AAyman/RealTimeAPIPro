@@ -69,8 +69,21 @@ class RolesAndPermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($lang, string $id)
     {
-        //
+        $role = Role::find($id);
+        if (!$role) {
+            return $this->error('', 'The role ID does not exist', 404);
+        }
+
+        $permissions = $role->permissions;
+
+        // remove permissions from a role
+        $role->revokePermissionTo($permissions);
+
+        $role->delete();
+        return $this->success([
+            'message' => 'This role and its permissions have been deleted successfully!'
+        ]);
     }
 }
