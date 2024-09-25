@@ -173,7 +173,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Ichtrojan\Otp\OtpServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*

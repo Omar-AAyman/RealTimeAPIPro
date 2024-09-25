@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Admin\RolesAndPermissionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,7 @@ Route::middleware(['auth:sanctum', 'setapplang'])->prefix('{locale}')->group(fun
     Route::post('/email-verification', [EmailVerificationController::class, 'emailVerification']);
     Route::get('/resend-email-verification', [EmailVerificationController::class, 'resendEmailVerification']);
     //     Route::post('/logout', [LogoutController::class, 'logout']);
+});
+Route::middleware(['auth:sanctum', 'setapplang'])->prefix('{locale}/admin')->group(function () {
+    Route::resource('role-permission', RolesAndPermissionsController::class);
 });

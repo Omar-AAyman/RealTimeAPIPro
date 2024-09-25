@@ -20,11 +20,15 @@ class LoginController extends Controller
             return $this->error('', 'Credentials do not match', 401);
         }
         $user = User::where(column: 'email', operator: $request->email)->first();
-        $user->notify(instance: new LoginNotification());
-        
+
+        try{
+            $user->notify(instance: new LoginNotification());
+        }catch(\Exception $e){};
+
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('API Token of ' . $user->first_name)->plainTextToken,
         ]);
     }
 }
+
