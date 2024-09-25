@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Events\LoggedIn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,8 @@ class LoginController extends Controller
         }
         $user = User::where(column: 'email', operator: $request->email)->first();
 
-        try{
-            $user->notify(instance: new LoginNotification());
-        }catch(\Exception $e){};
+        // When Event Login .. Send an email using listener 
+        LoggedIn::dispatch($user);
 
         return $this->success([
             'user' => $user,
@@ -31,4 +31,3 @@ class LoginController extends Controller
         ]);
     }
 }
-
